@@ -1,0 +1,841 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Variables and Datatypes in JS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e811f9b0-ac29-4e6d-b3eb-75203834cfff" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/webb1.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/keypad_blue.svg"/></div><h1 class="page-title">Variables and Datatypes in JS</h1><p class="page-description"></p></header><div class="page-body"><p id="ac35a852-763e-4b14-bef6-b07be191472f" class="">
+</p><p id="cf19845b-5b26-4d60-93c5-666328fae1cc" class="">Variables are the containers of the data.</p><p id="6ed1f3bd-cadf-47c7-ac08-9d205a2754eb" class="">
+</p><p id="0ba7ad40-2a57-4f15-b199-0b78db583838" class=""><strong>Code -</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4bdba4c0-076f-407b-ac1f-baed6665a61b" class="code"><code class="language-JavaScript">Full_name = &quot;Hardik Chhipa&quot;; //string value
+age = 21; //number value
+my_laptop_price = 115500.75; //float value
+x = null; //null value
+y = undefined; //undefined value
+completed_js = false; //boolean value
+in_college = true; //boolean value
+console.log(Full_name);
+console.log(age);
+console.log(my_laptop_price);
+console.log(x);
+console.log(completed_js);
+console.log(in_college);
+console.log(typeof (completed_js));</code></pre><p id="65779c68-9a4d-4670-8b09-e31978024909" class="">
+</p><p id="946e8d48-e5cd-46f9-beaf-f82cb880ed2c" class=""><strong>Output - </strong></p><figure id="6b4b9f0c-e3c7-4d46-b981-d2433cfc6e4c" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_09.05.05.png"><img style="width:1752px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_09.05.05.png"/></a></figure><p id="1fe5b232-4d9e-4ac2-b9fa-b2c86f07dec8" class="">
+</p><p id="464701ec-aff5-4a5a-8478-a1cccf6e04bb" class="">
+</p><ul id="ddbb3851-07fb-4655-b871-d931d949884c" class="bulleted-list"><li style="list-style-type:disc"><strong>Js is a Dynamic Typed language.</strong></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e8630bee-3853-4e75-b9f2-779a59627ccf" class="code"><code class="language-JavaScript">fullname = &quot;Hardik Chhipa&quot;
+age = 21
+gender = &quot;Male&quot;
+age = 25
+console.log(fullname)
+console.log(age)
+console.log(gender)
+
+//the output will be 
+//Hardik chhipa
+//25
+//Male</code></pre><p id="d1855c2a-d1ec-4279-ac1a-30377d744326" class=""><br/><br/><br/></p><ul id="c01afd64-d2af-41de-98f3-8c74dcc02bfc" class="bulleted-list"><li style="list-style-type:disc"><strong>Variable Rules</strong></li></ul><ol type="1" id="d8e48f14-c4b3-4e93-86ef-8501e9259d0c" class="numbered-list" start="1"><li>Variable names are case sensitive; &quot;a&quot; &amp; &quot;A&quot; is different.</li></ol><ol type="1" id="0340afde-f52b-4afc-a5f5-24ad8ac81e3a" class="numbered-list" start="2"><li>Only letters, digits, underscore(_) and $ is allowed. (not even space)</li></ol><ol type="1" id="79021b15-88b5-4da2-86a4-effe2d1c30d0" class="numbered-list" start="3"><li>Only a letter, underscore(_) or $ should be 1st character.</li></ol><ol type="1" id="bded7479-6fd2-48bb-907c-374c0ad59e99" class="numbered-list" start="4"><li>Reserved words cannot be variable names.</li></ol><p id="e4190000-2266-470c-b11d-048a87b7f125" class="">
+</p><p id="532dbbd8-a26b-414f-8419-d252eba1c58c" class="">
+</p><p id="5d8f8507-4b80-4cb4-a15a-788154d0ebaa" class="">
+</p><p id="ecc40fdf-5f75-4871-b27b-b7c4b4136195" class="">Reserved Names In Js.</p><p id="405a8253-4040-46e5-bada-0e99f01d967d" class="">
+</p><figure id="2e7887e8-6f11-40ec-845f-b333f3d5c8e3" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_09.21.04.png"><img style="width:2306px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_09.21.04.png"/></a></figure><p id="8b24ad21-0690-4996-8322-3e9262eec005" class=""><br/><br/><strong>Ways to give the variable name</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1add8bb1-a9ea-4ecc-a472-3e451caa27a4" class="code"><code class="language-JavaScript">fullname = &quot;Normal case&quot;
+fullName = &quot;Camel case&quot; //Most used and common ways to wirte.
+full_name = &quot;Snake case&quot;
+full-name = &quot;Kabab case&quot;
+FullName = &quot;Pascal case&quot;</code></pre><p id="ee7d0d08-1b79-46ee-b711-d2d35217b046" class="">
+</p><h3 id="55a8438d-6756-401c-8e1d-0e6b672b264c" class="">The actual way to define the variable</h3><p id="3718bfdb-029f-4f99-82e1-52a04feb14cf" class=""><em>let, const &amp; var</em></p><p id="e1c3b832-1044-44dc-a0aa-16d64e3054b5" class="">
+</p><ul id="25d838af-ea61-4238-a269-66b4073eee0f" class="bulleted-list"><li style="list-style-type:disc"><strong>var</strong> : Variable can be re-declared &amp; updated. A global scope variable.</li></ul><ul id="08b4f5a5-d123-4c97-a5c1-2bf3753f9487" class="bulleted-list"><li style="list-style-type:disc"><strong>let</strong> : Variable cannot be re-declared but can be updated. A block scope variable.</li></ul><ul id="9cd1313e-2065-4eb6-929a-bc084529d530" class="bulleted-list"><li style="list-style-type:disc"><strong>const</strong>: Variable cannot be re-declared or updated. A block scope variable.<br/><br/><br/></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="48168892-7448-454f-980c-6ecd38db194c" class="code"><code class="language-JavaScript">let fullName = &quot;hardikchhipa&quot;
+let age = 21
+let gender = &quot;Male&quot;
+console.log(fullName)
+console.log(age)
+console.log(gender)
+
+//Output will be same only, but it&#x27;s just a better way to assign.</code></pre><p id="fdf88d2b-2dff-4500-b7b6-d06e2a3ea5d4" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="721c31a9-607d-4b44-9073-9d1eb3cf7f88" class="code"><code class="language-JavaScript">//Why we&#x27;re not using var 
+
+var age = 21
+var age = 35
+var age = 57
+var age = 99
+
+console.log(age)//Output will be = 99 only.
+ //Because it&#x27;s accepting the re-declaration of the var name it may create the confusion.</code></pre><p id="967ad498-696c-4b89-a9d6-ca5a9dc26e66" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ef70d48b-6556-42ec-99a9-e8345edc4b72" class="code"><code class="language-JavaScript">//Where to use cons
+
+cons PI = 3.14
+
+console.log(PI)</code></pre><p id="39ce5413-427c-4fba-967e-395e6e8483f1" class="">
+</p><p id="85a2c7e6-4935-43b3-9f47-20cd5a9620f1" class=""><em>We can’t re-define the let variable, but one way to doit. By using the let variable in a single block and after that we can use it in a different blocks also. Ex.-</em></p><p id="b47baf21-568a-42ca-a61d-4cf33ecddfe8" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2225b8a6-f834-4e62-b125-6cccb6fda660" class="code"><code class="language-JavaScript">{
+	let age = 21
+	console.log(age)
+}//here  we&#x27;ll get the output as 21
+
+let age = 35
+console.log(age)// here we&#x27;ll get the output as 35</code></pre><p id="f6e3e9f7-23ea-41d0-9a0d-b7f41a6b6ccf" class="">
+</p><hr id="1c6bf43c-4306-41af-a7f3-797013c9f5ae"/><p id="a2e065c1-f83a-4087-8585-337383092ad1" class="">
+</p><p id="bf1c937f-3787-4c9c-82bf-970342a7e522" class="">
+</p><h2 id="8513a49b-bc26-4336-8686-670938f49d28" class=""><strong>Data Types in JavaScript <br/><br/></strong></h2><p id="f2637d59-260d-45a0-89b0-78aec10a9ec9" class=""><mark class="highlight-yellow">How to create the flowcharts :</mark></p><ol type="1" id="74059ae3-09fe-4bd8-8c5e-b0c6899a3f09" class="numbered-list" start="1"><li><mark class="highlight-yellow"><strong><a href="https://www.redgregory.com/notion/2022/1/17/how-to-get-started-with-mermaid-in-notion">Article on Mermaid flowchart</a></strong></mark></li></ol><ol type="1" id="eb23f82a-5012-4bcb-8c5b-51165a8cd169" class="numbered-list" start="2"><li><mark class="highlight-yellow"><strong><a href="http://mermaid.js.org/syntax/flowchart.html">Documentation of Mermaid</a></strong></mark></li></ol><p id="330dd54a-e7ab-4f8e-b3ac-25af8dcab5a7" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="37d914c2-e67e-4538-8b90-512b4cbef087" class="code code-wrap"><code class="language-Mermaid">graph TD
+    A(Data Types) --&gt; B(Primitive)
+    A --&gt; C(Non-Primitive)
+    B --&gt; D(String)
+    B --&gt; E(Number)
+    B --&gt; F(Boolean)
+    B --&gt; G(Null)
+    B --&gt; H(Undefined)
+    C --&gt; I(Object)
+    I --&gt; J(Array)
+    I --&gt; K(Function)
+    I --&gt; L(Date)
+    I --&gt; M(RegExp)
+</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="81e2941f-0e00-453a-8276-b3b8f5c3105a" class="code code-wrap"><code class="language-JavaScript">// Primitive Data Types in JavaScript
+
+// String
+let name = &quot;John&quot;; // Represents Textual data
+
+// Number
+let age = 25; // Represents Numeric data
+
+// Boolean
+let isStudent = true; // Represents Boolean :  true or false values
+
+// Null
+let car = null; // Represents the absence of any object value
+
+// Undefined
+let address; // Represents a variable that has been declared but not assigned a value
+
+console.log(typeof name);        // Output: string
+console.log(typeof age);         // Output: number
+console.log(typeof isStudent);   // Output: boolean
+console.log(typeof car);         // Output: object
+console.log(typeof address);     // Output: undefined</code></pre><h3 id="bd289dee-b24f-4588-9c31-e18d088125b4" class="">To explain <code>BigInt</code> and <code>Symbol</code> in JavaScript, let&#x27;s take a look at the following code:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="020f9f98-f27e-4df5-b7a8-1a7743161aba" class="code code-wrap"><code class="language-JavaScript">// BigInt
+const bigNumber = 1234567890123456789012345678901234567890n;
+console.log(bigNumber); // Output: 1234567890123456789012345678901234567890n
+console.log(typeof bigNumber); // Output: bigint
+
+// Symbol
+const sym1 = Symbol(&quot;sym1&quot;);
+const sym2 = Symbol(&quot;sym2&quot;);
+
+console.log(sym1); // Output: Symbol(sym1)
+console.log(sym2); // Output: Symbol(sym2)
+console.log(typeof sym1); // Output: symbol
+</code></pre><p id="e6168bbe-4504-435c-a289-569fb92eab5d" class="">In the code above, we demonstrate the use of <code>BigInt</code> and <code>Symbol</code> in JavaScript.</p><ul id="38dc3105-cfb6-4939-bc01-ceafd2dbb276" class="bulleted-list"><li style="list-style-type:disc"><code>BigInt</code> is a numeric data type introduced in JavaScript to represent integers of arbitrary precision. It allows you to work with integers beyond the safe integer limit of <code>Number</code> type. To create a <code>BigInt</code>, append <code>n</code> to the end of an integer literal or use the <code>BigInt()</code> function.</li></ul><ul id="0c6390f4-06d5-4949-a81d-d7996a06775c" class="bulleted-list"><li style="list-style-type:disc"><code>Symbol</code> is a unique and immutable data type introduced in JavaScript. It is often used to create unique property keys in objects or to define unique constants. Each <code>Symbol</code> value is unique and cannot be equal to any other value, including other <code>Symbol</code> values.</li></ul><p id="d47ee45f-dc72-4e0f-a038-66ddb4c64d0d" class="">Please note that <code>BigInt</code> and <code>Symbol</code> are relatively new additions to JavaScript and may not be supported in older browsers. Make sure to check the browser compatibility before using them in your code.</p><p id="4499c5b4-968c-4ec5-a1cc-42f5422aa5ae" class="">
+</p><h3 id="cadabfc2-8353-41b2-83cc-95fe777e4f9f" class="">Non-Primitive Datatypes in Js :</h3><ol type="1" id="1d1186ba-44a4-414b-826f-ca8a535a40da" class="numbered-list" start="1"><li>Objects : This can hold many types of primitive datatypes.</li></ol><p id="28c94e50-3f19-42ee-af67-e50972e27aab" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dc5beacd-72c7-4868-905a-7495ca2a7206" class="code"><code class="language-JavaScript">const student = {
+    fullName : &quot;Hardik Chhipa&quot;,
+    age : 21,
+    course : &quot;B.Tech&quot;,
+    cgpa : &quot;8.66&quot;,
+    isPass : true,
+};
+console.log(student)
+console.log(student.fullName)</code></pre><p id="c6640acd-ffe5-47e2-b0a0-3b9cbb6425f3" class="">
+</p><figure id="4deb760f-3104-46bf-9412-eb252194841e" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.43.18.png"><img style="width:1760px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.43.18.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cb058701-22f5-4aea-9a2b-86c6b15fe7b0" class="code"><code class="language-JavaScript">//Sytax of creating objects in JS
+const objName = {
+    key1: &quot;value1&quot;,
+    key2: &quot;value2&quot;,
+    key3: &quot;value3&quot;,
+}
+//How to access the key values in the objects
+
+console.log(objName.key1);
+console.log(objName[&#x27;key3&#x27;]);
+</code></pre><p id="a721a11b-66d2-4463-9406-e5f94e3ca190" class="">
+</p><p id="de503249-00e7-4ba8-b76f-ff576658ecb7" class="">
+</p><p id="61df2f6b-373a-4e1c-a518-4e72ccc7e4b7" class="">
+</p><figure id="e0b8f529-aade-4488-bdd2-0ec3e58c79a3" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.58.27.png"><img style="width:1760px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.58.27.png"/></a></figure><p id="f6fb3cd0-1ae0-4fe5-8d48-79ca643fbff9" class="">output = 21</p><p id="c6a21e3c-bd6c-422c-b637-7f23b1a05f49" class="">
+</p><figure id="c2c38934-97a3-4ba5-b21b-20a458dbc2b2" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.59.12.png"><img style="width:1760px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_10.59.12.png"/></a></figure><p id="6810457e-f17e-447b-a3e7-87174325d987" class="">output = Rahul Sharma<br/><br/><br/><br/><br/></p><h2 id="32fde9c1-284b-4e0c-b9c1-67606a288ed2" class="">Practice Set - 1</h2><p id="e50e2daf-e169-4d83-9352-54814865d3b4" class="">
+</p><p id="15a42736-3287-4f1d-b9cc-95cf252ae79c" class="">Write a JS code for the given data in the below image.</p><figure id="99a4694e-d1fa-4ee6-9559-c78ec4b0d448" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.03.19.png"><img style="width:384px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.03.19.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a0cf0e0f-fa18-47c6-b031-b1d9d9641c37" class="code"><code class="language-JavaScript">const product = {
+    title : &quot;Ball pen, Black&quot;,
+    rating: 4.2,
+    isDeal : true,
+    offer : 5,
+    MRP : 285,
+    price : 270,
+};
+
+console.log(product);
+</code></pre><p id="0f33cf69-cd4b-44ef-9f3c-c0b544ca2375" class="">Output : </p><p id="a3c41271-cfaf-47e2-b00f-53ff560931a2" class="">
+</p><figure id="1266f3cb-6872-42f2-89d6-da2630bf6353" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.10.19.png"><img style="width:1428px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.10.19.png"/></a></figure><p id="cb6dabcc-2d6c-4a4d-8233-a00748afd1f2" class=""><br/>Qs2. Create a const object called &quot;profile&quot; to store information shown in the picture.<br/></p><p id="8d2ff4b0-02ce-4a03-9c8e-29768a71b57e" class="">
+</p><figure id="045edb30-dbe7-4bf1-b21d-4453cc078d11" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.11.44.png"><img style="width:1800px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.11.44.png"/></a></figure><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="20741dc4-91ca-4a7b-b5c2-f195364a0d74" class="code"><code class="language-JavaScript">const profile = {
+    userName : &quot;Hardik Chhipa&quot;,
+    isFlow : true,
+    followers : 788,
+    following : 362,
+    bio : &quot;anykinda bio&quot;
+};
+
+console.log(profile);</code></pre><p id="30a5622e-7ca1-4eca-9c3d-8fd0db6050ca" class="">Output : </p><figure id="781d68d0-1386-48c4-a717-653810430c15" class="image"><a href="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.15.55.png"><img style="width:1414px" src="Variables%20and%20Datatypes%20in%20JS%20e811f9b0ac294e6db3eb75203834cfff/Screenshot_2023-12-22_at_11.15.55.png"/></a></figure><p id="fc45c517-722d-47fb-930d-2e901e627219" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

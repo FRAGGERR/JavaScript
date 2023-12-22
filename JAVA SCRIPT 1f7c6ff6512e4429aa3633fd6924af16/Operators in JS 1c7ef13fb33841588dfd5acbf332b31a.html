@@ -1,0 +1,1047 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Operators in JS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1c7ef13f-b338-4158-8dfd-5acbf332b31a" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_william_morris_1875.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/looped-square_orange.svg"/></div><h1 class="page-title">Operators in JS</h1><p class="page-description"></p></header><div class="page-body"><p id="aee74fdf-16a6-416c-ac01-5068e48fa282" class="">
+</p><p id="38c389b6-f14c-4835-991d-d8cebf15e212" class=""><strong>Comments in JS </strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5e759cea-dde9-42ff-aefb-d1d103897554" class="code"><code class="language-JavaScript">//This is the First way to write the comments (Sinle line comment)
+
+
+/*   This is the second way to write the comments
+		 In this way we can wirte comments in 
+		 multipel lines.
+
+			*/</code></pre><p id="3c31a563-2707-45e4-a772-b7b758e162a5" class=""><br/><br/></p><h3 id="300ff77d-e1cc-429c-a44c-00e2aa0d1f41" class="">Types of Operators in JS </h3><p id="9b36daef-1ef1-4355-b9a5-6c44b3fe0077" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="870068af-f47e-4e78-abbb-2638270c5923" class="code"><code class="language-Mermaid">
+
+graph LR
+    A[Operators in JavaScript]
+
+    B[Arithmetic Operators]
+    C[Comparison Operators]
+    D[Logical Operators]
+    E[Assignment Operators]
+    F[Bitwise Operators]
+    G[Unary Operators]
+    H[Ternary Operator]
+    I[Equality Operators]
+
+    A --&gt;|1.| B
+    A --&gt;|2.| C
+    A --&gt;|3.| D
+    A --&gt;|4.| E
+    A --&gt;|5.| F
+    A --&gt;|6.| G
+    A --&gt;|7.| H
+    A --&gt;|8.| I</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c9c93971-1279-4557-898c-5a96e72f3c52" class="code"><code class="language-Mermaid">
+graph RL
+    subgraph Arithmetic
+        A[+ Addition]
+        B[- Subtraction]
+        C[* Multiplication]
+        D[ Division]
+        E[% Modulo]
+    end
+
+    subgraph Comparison
+        F[== Equal]
+        G[!= Not Equal]
+        H[&gt; Greater Than]
+        I[&lt; Less Than]
+        J[&gt;= Greater Than or Equal]
+        K[&lt;= Less Than or Equal]
+    end
+
+    subgraph Logical
+        L[&amp;&amp; Logical AND]
+        M[ Logical OR]
+        N[! Logical NOT]
+    end
+
+    subgraph Assignment
+        O[= Assignment]
+        P[+= Addition Assignment]
+        Q[-= Subtraction Assignment]
+        R[*= Multiplication Assignment]
+        S[ Division Assignment]
+    end
+
+    subgraph Bitwise
+        T[&amp; Bitwise AND]
+        U[ Bitwise OR]
+        V[^ Bitwise XOR]
+        W[~ Bitwise NOT]
+        X[&lt;&lt; Left Shift]
+        Y[&gt;&gt; Right Shift]
+        Z[&gt;&gt;&gt; Unsigned Right Shift]
+    end
+
+    subgraph Unary
+        AA[+ Unary Plus]
+        AB[- Unary Minus]
+        AC[! Logical NOT]
+        AD[~ Bitwise NOT]
+        AE[typeof Typeof]
+        AF[void Void]
+        AG[delete Delete]
+    end
+
+    subgraph Ternary
+        AH[? : Ternary Operator]
+    end
+
+    subgraph Equality
+        AI[== Equal]
+        AJ[!= Not Equal]
+        AK[=== Strict Equal]
+        AL[!== Strict Not Equal]
+    end
+
+    subgraph Others
+        AM[in In]
+        AN[instanceof Instanceof]
+    end</code></pre><p id="7e222a34-930a-47e6-af97-bff4d4757344" class=""><br/>(i)<br/><strong>. Arithmetic Operators </strong><br/><br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c95defa3-bd40-4e0e-8af7-f149858d2d84" class="code"><code class="language-Mermaid">graph TD
+    A[Arithmetic Operators]
+
+    B[+ Addition]
+    C[- Subtraction]
+    D[* Multiplication]
+    E[Division]
+    F[&quot;% Modulo&quot;]
+
+    A --&gt;|1.| B
+    A --&gt;|2.| C
+    A --&gt;|3.| D
+    A --&gt;|4.| E
+    A --&gt;|5.| F</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="713a0f00-5169-4949-bcec-7543ebe7a4ff" class="code"><code class="language-JavaScript">let a = 10;
+let b = 20;
+let c = 30;
+console.log(&quot;a+b+c = &quot;, a + b + c); 
+console.log(&quot;a-b+c = &quot;, a + b + c);
+
+
+let x = 4;
+let y = 2;
+console.log(&quot;x^y = &quot;, x**y)</code></pre><p id="bb659472-2285-418d-9732-b1abbea76e6b" class="">Output = 16<div class="indented"><p id="a67ecb24-cfcf-45df-8ad9-e8fb57a84d7c" class=""><br/>There are some more arithmetic operators present in the JS<br/><br/></p><ul id="fb678bad-eedd-486f-bd19-8830403787fb" class="bulleted-list"><li style="list-style-type:disc">Increment oper. = a++, ++a.</li></ul><ul id="860d13fa-369c-47bb-b312-6fedca6fa007" class="bulleted-list"><li style="list-style-type:disc">Decrement oper. = b—, —b.<br/><br/><br/><hr id="00f1b4a5-53e4-4308-b428-4cd7aec2bb5c"/><p id="4ae26402-d143-446d-a49f-b4ab007f942f" class="">
+</p></li></ul></div></p><p id="2e26f925-a3bd-473b-b9e9-4d817c2c029d" class="">
+</p><p id="45d68588-991d-42bd-a54d-2655af55188e" class="">(ii). <strong>Comparison Operators </strong></p><p id="3cd7bbed-d690-4c38-9561-6fcf64c978ec" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="be82054d-95af-42b8-997b-69b37c0dd677" class="code"><code class="language-Mermaid">graph LR
+    A[Comparison Operators]
+
+    B[== Equal]
+    C[!= Not Equal]
+    D[=== Strict Equal]
+    E[!== Strict Not Equal]
+    F[ &lt; Greater Than]
+    G[ &gt; Less Than]
+    H[ &lt;= Greater Than or Equal]
+    I[ &gt;=Less Than or Equal ]
+
+    A --&gt;|1.| B
+    A --&gt;|2.| C
+    A --&gt;|3.| D
+    A --&gt;|4.| E
+    A --&gt;|5.| F
+    A --&gt;|6.| G
+    A --&gt;|7.| H
+    A --&gt;|8.| I</code></pre><p id="56e8b176-4c3c-4934-94a2-e1b4bd9aee5b" class="">
+</p><ol type="1" id="a6c5a3fa-c194-4a0c-a008-9e21b7c53282" class="numbered-list" start="1"><li><strong>Equal (</strong><code><strong>==</strong></code><strong>):</strong><ul id="8134d552-c727-4fdb-849e-cf30f3406301" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are equal in value, regardless of their data types.</li></ul><ul id="cd41917d-9a2f-4480-b066-31d0191ba90b" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="93eb2941-d70c-447e-a8cf-8b667b82d848" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 5 == &#x27;5&#x27;; // Result: true
+
+</code></pre></li></ul></li></ol><ol type="1" id="42710a94-305d-4c7c-a514-7399acd6cd41" class="numbered-list" start="2"><li><strong>Not Equal (</strong><code><strong>!=</strong></code><strong>):</strong><ul id="0bd9201b-f6c9-4463-a8f1-4ea565281f28" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are not equal in value, regardless of their data types.</li></ul><ul id="eeb4c51c-de65-474a-a252-38e18661bf61" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="841064f2-8c39-48b1-b6c9-fb70cdfc01c3" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 10 != &#x27;10&#x27;; // Result: false
+
+</code></pre></li></ul></li></ol><ol type="1" id="9c51bc5a-a053-4e96-98be-1d495f89ed74" class="numbered-list" start="3"><li><strong>Strict Equal (</strong><code><strong>===</strong></code><strong>):</strong><ul id="bcf1d4ca-6935-4634-ac1c-c2a7860f59a8" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are equal in<span style="border-bottom:0.05em solid"> value and data type</span>.</li></ul><ul id="f946b358-f4df-4b9d-af8e-baf166eb01d5" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="561bc163-a3ab-4689-ab99-c607aca2062a" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 5 === &#x27;5&#x27;; // Result: false
+
+</code></pre></li></ul></li></ol><ol type="1" id="ab19e13f-0e1c-46ab-ad21-92e79ba74da4" class="numbered-list" start="4"><li><strong>Strict Not Equal (</strong><code><strong>!==</strong></code><strong>):</strong><ul id="084a0263-4976-4ff6-827b-71cfb0c48a09" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are not equal in <span style="border-bottom:0.05em solid">value or data type</span>.</li></ul><ul id="d599cd26-9542-47e8-b218-93f117d977c3" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="672a85ff-bc3c-4fb8-874b-340aaa16ab86" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 10 !== &#x27;10&#x27;; // Result: true
+
+</code></pre></li></ul></li></ol><ol type="1" id="905f380d-1132-4826-b6ec-eba7902c62e6" class="numbered-list" start="5"><li><strong>Greater Than (</strong><code><strong>&gt;</strong></code><strong>):</strong><ul id="81a7a917-4096-4aae-805b-058ecc4fb652" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the left operand is greater than the right operand.</li></ul><ul id="0c6b40ca-851a-4c0a-99e1-f550884a6a3c" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="57da6119-01ad-429e-8d31-c36490ce9906" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 10 &gt; 5; // Result: true
+
+</code></pre></li></ul></li></ol><ol type="1" id="01faadce-46be-4cf9-833b-c23d5d29044a" class="numbered-list" start="6"><li><strong>Less Than (</strong><code><strong>&lt;</strong></code><strong>):</strong><ul id="5e140185-d797-4ece-8c61-7f6c920ab5e1" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the left operand is less than the right operand.</li></ul><ul id="3357e497-09e9-4733-92fe-dfe023188523" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d06d77e5-0c3d-4164-a401-a4959e3439e2" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 5 &lt; 10; // Result: true
+
+</code></pre></li></ul></li></ol><ol type="1" id="2953c827-ef2e-4b68-8363-0e261a0095ea" class="numbered-list" start="7"><li><strong>Greater Than or Equal (</strong><code><strong>&gt;=</strong></code><strong>):</strong><ul id="885a16db-f5c9-4d05-a51d-3232f4aedc71" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the left operand is greater than or equal to the right operand.</li></ul><ul id="b33d22ff-9a8c-4b60-b6f6-dba6b45c2d58" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9e624d24-fcd8-4491-94a1-e6938f423e31" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 10 &gt;= 10; // Result: true
+
+</code></pre></li></ul></li></ol><ol type="1" id="c50bf287-de7f-4b11-9658-ad4d89c38815" class="numbered-list" start="8"><li><strong>Less Than or Equal (</strong><code><strong>&lt;=</strong></code><strong>):</strong><ul id="7f8f2856-9a19-4903-bbad-07f39d006c62" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the left operand is less than or equal to the right operand.</li></ul><ul id="4fd9657e-6f4c-44fb-8ff5-42a8ee44e345" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ec1e0533-652d-4dd7-a14a-3d1b38b89c60" class="code code-wrap"><code class="language-JavaScript">javascriptCopy code
+let result = 5 &lt;= 10; // Result: true
+</code></pre><p id="76006bc6-53e7-4c26-bafa-5afc80d6578e" class="">
+</p><hr id="ea4a97bc-aedd-4779-bc8c-a25ea29082d5"/><p id="e5f5d141-19b2-40b0-8a13-fb0eb608ce2c" class="">
+</p></li></ul></li></ol><p id="cf9893a2-027f-457f-a599-6237a94f25ec" class=""><strong>(iii). Logical Operators</strong></p><p id="feecf55c-318f-4040-b82a-88cf8efaf65b" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="912f0332-272e-4c55-889a-b5a3bbaf7c87" class="code"><code class="language-Mermaid">graph TD
+    A[Logical Operators]
+
+    B[&amp;&amp; Logical AND]
+    C[Logical  OR]
+    D[! Logical NOT]
+
+    A --&gt;B
+    A --&gt;C
+    A --&gt;D</code></pre><p id="cbcff67e-2efa-44ba-b974-62bf56cd21d0" class="">
+</p><p id="ff9f6950-240b-440c-8af3-52c5a17181ba" class="">A. <strong>Logical AND (</strong><code><strong>&amp;&amp;</strong></code><strong>):</strong><div class="indented"><ul id="cceb2b86-b55f-4a08-9992-310996067ad2" class="bulleted-list"><li style="list-style-type:disc">The logical AND operator returns <code><strong>true</strong></code> if both operands are <code><strong>true</strong></code>, and <code><strong>false</strong></code> otherwise.</li></ul><ul id="8148bf0e-f4c2-42d7-9c1e-9bf58918e198" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cb1a36a0-01a7-4f68-b1bb-fd1b108ba6e9" class="code code-wrap"><code class="language-JavaScript">
+let result = true &amp;&amp; false; // Result: false</code></pre></li></ul></div></p><p id="43f27ade-f839-4d26-80d8-60831b6e388a" class="">B. <strong>Logical OR (</strong><code><strong>||</strong></code><strong>):</strong><div class="indented"><ul id="c264ade6-385c-4230-8b7c-0122e16ce621" class="bulleted-list"><li style="list-style-type:disc">The logical OR operator returns <code><strong>true</strong></code> if at least one of the operands is <code><strong>true</strong></code>, and <code><strong>false</strong></code> if both are <code><strong>false</strong></code>.</li></ul><ul id="ddd51d82-9fc3-4ea3-8053-a0854dcbb631" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c020f919-8bd6-4da4-9d23-ae3e084a3afb" class="code code-wrap"><code class="language-JavaScript">let result = true || false; // Result: true</code></pre></li></ul></div></p><p id="8febfd8c-aa70-43b4-9d2e-a5d4035c921c" class="">C. <strong>Logical NOT (</strong><code><strong>!</strong></code><strong>):</strong><div class="indented"><ul id="2bf94ab4-d748-463b-8142-fcec44824ebd" class="bulleted-list"><li style="list-style-type:disc">The logical NOT operator negates the Boolean value of its operand. If the operand is <code><strong>true</strong></code>, it returns <code><strong>false</strong></code>, and vice versa.</li></ul><ul id="1b2c2c9a-c0a2-461d-b5fe-074f73fb80c3" class="bulleted-list"><li style="list-style-type:disc">Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2b9d2e6a-00b0-4713-be05-35af40b6a172" class="code code-wrap"><code class="language-JavaScript">let result = !true; // Result: false</code></pre></li></ul></div></p><p id="738bdc9f-41d6-4a54-ad3d-8d68390de42a" class="">
+</p><p id="15a09a85-1053-4031-9d37-11f31c3e607c" class="">Example Code -<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6575d8d3-6a4c-4134-ade2-409e110d5cc7" class="code"><code class="language-JavaScript">let a = 5;
+let b = 5;
+
+let cond1 = a == b; // true
+let cond2 = a != b; // false
+console.log(&quot;a || b = &quot;, cond1 || cond2);
+console.log(&quot;a &amp;&amp; b = &quot;, cond1 &amp;&amp; cond2);</code></pre></div></p><p id="7fb37fd3-ffbd-4028-a9de-3e9a94d6b460" class="">
+</p><p id="bec5a8d8-36a8-44a6-a53d-ba37ee875f8d" class="">Output</p><figure id="2c49e679-5348-4e3a-b3f5-572c971fa93c" class="image"><a href="Operators%20in%20JS%201c7ef13fb33841588dfd5acbf332b31a/Screenshot_2023-12-22_at_17.54.10.png"><img style="width:1414px" src="Operators%20in%20JS%201c7ef13fb33841588dfd5acbf332b31a/Screenshot_2023-12-22_at_17.54.10.png"/></a></figure><p id="6d032736-c7bc-4017-81e4-61eb214d4b3e" class="">
+</p><p id="04d69fce-b44e-436d-bc29-6cc0cd9cb026" class=""><strong>The below table contain 2 condition and we’re apply And gate and Or gate to that conditions.</strong></p><table id="6c8da525-e284-4e14-8aaa-fac4c9676a18" class="simple-table"><tbody><tr id="febc9add-0775-4aa0-8035-ad7a0e991e26"><td id="iRfS" class="">cond.1</td><td id="_Slz" class="">cond.2</td><td id="t@ld" class="">&amp;&amp;</td><td id="s}h[" class="">||</td></tr><tr id="30bdb483-be91-47b4-8f73-3013a56fb4ea"><td id="iRfS" class="">True</td><td id="_Slz" class="">True</td><td id="t@ld" class="">True</td><td id="s}h[" class="">True</td></tr><tr id="79a77677-27be-4226-8f21-70139f98556d"><td id="iRfS" class="">True</td><td id="_Slz" class="">False</td><td id="t@ld" class="">False</td><td id="s}h[" class="">True</td></tr><tr id="5881ed54-ba31-433d-9592-b4ba560fa3d4"><td id="iRfS" class="">False</td><td id="_Slz" class="">True</td><td id="t@ld" class="">False</td><td id="s}h[" class="">True</td></tr><tr id="c7b8bf67-8d38-4be3-b026-5c9da376ecee"><td id="iRfS" class="">False</td><td id="_Slz" class="">False</td><td id="t@ld" class="">False</td><td id="s}h[" class="">False</td></tr></tbody></table><hr id="b0431db6-3415-49dd-aceb-e9a410952f7c"/><p id="9958163d-7995-4b3f-9373-8d41a6be8f90" class="">
+</p><p id="6d886d88-5329-4dc6-864e-ad4454840819" class=""><strong>(iV). Assignment Operators </strong></p><p id="d42f75ad-5a59-4d25-a17e-2217b4a5a70e" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="18737962-5eb6-4081-804a-965bf55afd4e" class="code"><code class="language-Mermaid">graph LR
+    A[Assignment Operators]
+
+    B[= Assignment]
+    C[+= Addition Assignment]
+    D[-= Subtraction Assignment]
+    E[*= Multiplication Assignment]
+    F[Division Assignment /=]
+
+    A --&gt;B
+    A --&gt;C
+    A --&gt;D
+    A --&gt;E
+    A --&gt;F</code></pre><p id="375ec67c-dc4f-4922-a333-c0b0d8ea3a56" class="">This flowchart illustrates the five main types of assignment operators in JavaScript:</p><ol type="1" id="f80b5cc9-eb09-4ed9-a6ac-14ba18d51185" class="numbered-list" start="1"><li><strong>Assignment (</strong><code><strong>=</strong></code><strong>):</strong><ul id="199f0bfe-1aa3-4d05-b190-75ef34cdfc0c" class="bulleted-list"><li style="list-style-type:disc">Assigns the value on the right to the variable on the left.</li></ul></li></ol><ol type="1" id="b33dee67-4dc1-48ef-aada-452b7a9ff3b4" class="numbered-list" start="2"><li><strong>Addition Assignment (</strong><code><strong>+=</strong></code><strong>):</strong><ul id="32480484-3232-45ed-89dc-0bf1b2160d0e" class="bulleted-list"><li style="list-style-type:disc">Adds the value on the right to the existing value of the variable on the left.</li></ul></li></ol><ol type="1" id="4d3847eb-1b73-4a7e-a6ad-3d682e17dcae" class="numbered-list" start="3"><li><strong>Subtraction Assignment (</strong><code><strong>=</strong></code><strong>):</strong><ul id="868a4bf5-d754-4e89-b6ef-352c498f6c8c" class="bulleted-list"><li style="list-style-type:disc">Subtracts the value on the right from the existing value of the variable on the left.</li></ul></li></ol><ol type="1" id="9bd7dc35-2736-424a-9d71-1ead296302a8" class="numbered-list" start="4"><li><strong>Multiplication Assignment (</strong><code><strong>=</strong></code><strong>):</strong><ul id="313db7ea-9486-4823-ad21-d593c283cf0e" class="bulleted-list"><li style="list-style-type:disc">Multiplies the existing value of the variable on the left by the value on the right.</li></ul></li></ol><ol type="1" id="6da52609-9424-477b-8aa7-eecdd1d929ec" class="numbered-list" start="5"><li><strong>Division Assignment (</strong><code><strong>/=</strong></code><strong>):</strong><ul id="01076817-d49e-49bc-9ed4-8a7b383b41a2" class="bulleted-list"><li style="list-style-type:disc">Divides the existing value of the variable on the left by the value on the right.</li></ul></li></ol><p id="74576952-adeb-4e2e-a066-e2258c517791" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b2603340-6535-4564-9b12-bac2cf19221d" class="code"><code class="language-JavaScript">// Assignment Operator (=)
+let x = 5; // x is assigned the value 5
+
+// Addition Assignment (+=)
+let y = 10;
+y += 3; // Equivalent to y = y + 3, now y is 13
+
+// Subtraction Assignment (-=)
+let z = 8;
+z -= 2; // Equivalent to z = z - 2, now z is 6
+
+// Multiplication Assignment (*=)
+let a = 4;
+a *= 2; // Equivalent to a = a * 2, now a is 8
+
+// Division Assignment (/=)
+let b = 16;
+b /= 4; // Equivalent to b = b / 4, now b is 4</code></pre><hr id="ba070f25-7707-45b2-9751-b1e50d08e969"/><p id="17e3987d-f27d-4d25-abb8-f0e93e0d581f" class="">
+</p><p id="4e5d948c-74a5-4ee7-9afe-795589f35585" class="">
+</p><p id="c70089f1-bac5-4745-94a1-6c0310636144" class=""><strong>(V). Bitwise Op</strong></p><p id="5c34cb14-8506-4403-849d-14251c371bec" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="02625fb7-fed1-4f5b-844d-7a575b08e312" class="code"><code class="language-Mermaid">graph LR
+    A[Bitwise Operators]
+
+    B[&amp; Bitwise AND]
+    C[ Bitwise OR]
+    D[^ Bitwise XOR]
+    E[~ Bitwise NOT]
+    F[&lt;&lt; Left Shift]
+    G[&gt;&gt; Right Shift]
+    H[&gt;&gt;&gt; Unsigned Right Shift]
+
+    A --&gt; B
+    A --&gt;C
+    A --&gt; D
+    A --&gt; E
+    A --&gt; F
+    A --&gt; G
+    A --&gt;H</code></pre><p id="979d9be5-eec8-4b84-8df8-bc835c90d3f7" class="">
+</p><p id="80141153-2820-4d40-8a9d-8f21e5e0adf5" class="">This flowchart illustrates the seven main types of bitwise operators in JavaScript:</p><ol type="1" id="c7620f3c-3d40-4f8e-8f75-7b33950f4082" class="numbered-list" start="1"><li><strong>Bitwise AND (</strong><code><strong>&amp;</strong></code><strong>):</strong><ul id="ea26324f-6f72-46d5-9aa5-4b9eccb33d99" class="bulleted-list"><li style="list-style-type:disc">Performs a bitwise AND operation.</li></ul></li></ol><ol type="1" id="ed5e6a1b-f6ba-486f-9fa7-f872c822df6f" class="numbered-list" start="2"><li><strong>Bitwise OR (</strong><code><strong>|</strong></code><strong>):</strong><ul id="068507f2-3196-4022-b7b7-6b668a047aba" class="bulleted-list"><li style="list-style-type:disc">Performs a bitwise OR operation.</li></ul></li></ol><ol type="1" id="b43386f0-6604-4c47-bf49-04953e4c09e1" class="numbered-list" start="3"><li><strong>Bitwise XOR (</strong><code><strong>^</strong></code><strong>):</strong><ul id="51f68f8e-d94b-4c4f-81d6-d75dc60743dc" class="bulleted-list"><li style="list-style-type:disc">Performs a bitwise XOR (exclusive OR) operation.</li></ul></li></ol><ol type="1" id="7d93f4fd-0923-41d0-8d57-e88c43eeb0cb" class="numbered-list" start="4"><li><strong>Bitwise NOT (</strong><code><strong>~</strong></code><strong>):</strong><ul id="44bc9503-6bd3-41e3-8191-1578e256661f" class="bulleted-list"><li style="list-style-type:disc">Inverts the bits of its operand.</li></ul></li></ol><ol type="1" id="d031a8a2-672b-42fc-a8d7-125e1f24764d" class="numbered-list" start="5"><li><strong>Left Shift (</strong><code><strong>&lt;&lt;</strong></code><strong>):</strong><ul id="3ac17d8b-e420-4a40-ba89-e922ed756033" class="bulleted-list"><li style="list-style-type:disc">Shifts the bits of the left operand to the left by a specified number of positions.</li></ul></li></ol><ol type="1" id="2f081c9b-1a64-4d9f-8161-a132c72ed0fd" class="numbered-list" start="6"><li><strong>Right Shift (</strong><code><strong>&gt;&gt;</strong></code><strong>):</strong><ul id="6f432933-4208-4dc1-983b-005081e75f40" class="bulleted-list"><li style="list-style-type:disc">Shifts the bits of the left operand to the right by a specified number of positions.</li></ul></li></ol><ol type="1" id="4c5a47f7-772f-4c69-99c2-3cb327f70301" class="numbered-list" start="7"><li><strong>Unsigned Right Shift (</strong><code><strong>&gt;&gt;&gt;</strong></code><strong>):</strong><ul id="fd072fc7-d7a6-411a-9015-5e26ea4e8bdb" class="bulleted-list"><li style="list-style-type:disc">Similar to the right shift, but fills the leftmost positions with zeros.<br/><br/></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f7f49a6c-174b-4965-9be1-d83594626472" class="code"><code class="language-JavaScript">// Bitwise AND (&amp;)
+let resultAnd = 5 &amp; 3; // Binary: 0101 &amp; 0011 = 0001
+console.log(resultAnd); // Output: 1
+
+// Bitwise OR (|)
+let resultOr = 5 | 3; // Binary: 0101 | 0011 = 0111
+console.log(resultOr); // Output: 7
+
+// Bitwise XOR (^)
+let resultXor = 5 ^ 3; // Binary: 0101 ^ 0011 = 0110
+console.log(resultXor); // Output: 6
+
+// Bitwise NOT (~)
+let num = 5;
+let resultNot = ~num; // Binary: ~0101 = 1111 1111 1111 1111 1111 1111 1111 1010 (32-bit representation)
+console.log(resultNot); // Output: -6
+
+// Left Shift (&lt;&lt;)
+let leftShift = 5 &lt;&lt; 1; // Binary: 0101 &lt;&lt; 1 = 1010
+console.log(leftShift); // Output: 10
+
+// Right Shift (&gt;&gt;)
+let rightShift = 5 &gt;&gt; 1; // Binary: 0101 &gt;&gt; 1 = 0010
+console.log(rightShift); // Output: 2
+
+// Unsigned Right Shift (&gt;&gt;&gt;)
+let unsignedRightShift = -5 &gt;&gt;&gt; 1; // Binary: 1111 1111 1111 1111 1111 1111 1111 1011 &gt;&gt;&gt; 1 = 0111 1111 1111 1111 1111 1111 1111 1101
+console.log(unsignedRightShift); // Output: 2147483645 (32-bit representation)</code></pre><hr id="3590e306-cb25-42bb-9333-c57f8f35c9bb"/><p id="d7760966-ed1d-4aab-b7d8-1518d534c0f3" class=""><br/><br/><strong>(Vi). Unary Operators </strong></p><p id="a3def8bf-d4df-437f-8ae0-68b4618fabc0" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0d899d43-1d79-46f1-bc5d-252abcbc6751" class="code code-wrap"><code class="language-Mermaid">graph LR
+A[Unary Operators]
+B[+ Unary Plus]
+C[- Unary Minus]
+D[! Logical NOT]
+E[~ Bitwise NOT]
+F[typeof Typeof]
+G[void Void]
+H[delete Delete]
+
+A --&gt;B
+A --&gt;C
+A --&gt;D
+A --&gt;E
+A --&gt;F
+A --&gt;G
+A --&gt; H
+</code></pre><p id="d252e36f-fd3f-4119-bf6a-606ef6ed29e2" class="">
+</p><p id="e4d4d16f-02e7-4eca-9693-2f59d0ad0859" class="">This flowchart illustrates the seven main types of unary operators in JavaScript:</p><ol type="1" id="8b283c28-379a-42e5-a9fb-70dab9482746" class="numbered-list" start="1"><li><strong>Unary Plus (</strong><code><strong>+</strong></code><strong>):</strong><ul id="15486bb4-fb4b-41c4-986d-a0f10687a37b" class="bulleted-list"><li style="list-style-type:disc">Converts its operand to a number. If it cannot be converted, it returns <code><strong>NaN</strong></code>.</li></ul></li></ol><ol type="1" id="9ac1c5a7-b34d-4448-affa-c1d41e6fff2b" class="numbered-list" start="2"><li><strong>Unary Minus (</strong><code><strong></strong></code><strong>):</strong><ul id="e6008575-4486-477f-bdf0-c5d682bd0cdd" class="bulleted-list"><li style="list-style-type:disc">Converts its operand to a number and negates the result.</li></ul></li></ol><ol type="1" id="b1babea7-130f-4104-bfb5-00cc3133bb01" class="numbered-list" start="3"><li><strong>Logical NOT (</strong><code><strong>!</strong></code><strong>):</strong><ul id="e3f1cba9-59d5-44b7-aaf7-ef4c487b26c6" class="bulleted-list"><li style="list-style-type:disc">Inverts the Boolean value of its operand. If the operand is truthy, it returns <code><strong>false</strong></code>; if falsy, it returns <code><strong>true</strong></code>.</li></ul></li></ol><ol type="1" id="e1c411eb-4f59-4b55-b33f-474cd48fa190" class="numbered-list" start="4"><li><strong>Bitwise NOT (</strong><code><strong>~</strong></code><strong>):</strong><ul id="06490a56-9c1e-42cd-b388-ab2493fd0923" class="bulleted-list"><li style="list-style-type:disc">Inverts the bits of its operand.</li></ul></li></ol><ol type="1" id="fa5a63f7-8dc5-4a40-9389-65b08bbf73c2" class="numbered-list" start="5"><li><strong>Typeof (</strong><code><strong>typeof</strong></code><strong>):</strong><ul id="ea1ff4b5-f1ec-435c-913e-a8377e4e27fb" class="bulleted-list"><li style="list-style-type:disc">Returns a string indicating the type of the operand. It can be used to check the type of a variable.</li></ul></li></ol><ol type="1" id="dad335e5-2d05-4d4e-9768-e794804a779a" class="numbered-list" start="6"><li><strong>Void (</strong><code><strong>void</strong></code><strong>):</strong><ul id="8858c5a2-ce83-495b-94fe-29dd4fec9a59" class="bulleted-list"><li style="list-style-type:disc">Evaluates its operand and returns <code><strong>undefined</strong></code>.</li></ul></li></ol><ol type="1" id="7dd92e1f-18e0-40b2-b985-b4053859f1b5" class="numbered-list" start="7"><li><strong>Delete (</strong><code><strong>delete</strong></code><strong>):</strong><ul id="b1ea4bbe-a9ef-4b57-b8a4-b8d16bfccbdb" class="bulleted-list"><li style="list-style-type:disc">Deletes an object&#x27;s property or an element at a specified index in an array.<br/><br/><br/></li></ul></li></ol></li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d6e3bb2e-2e14-480b-9eeb-1f1f7e59ae05" class="code"><code class="language-JavaScript">// Unary Plus (+)
+let num1 = &#x27;5&#x27;;
+let resultPlus = +num1; // Converts &#x27;5&#x27; to a number
+console.log(resultPlus); // Output: 5
+
+// Unary Minus (-)
+let num2 = &#x27;8&#x27;;
+let resultMinus = -num2; // Converts &#x27;8&#x27; to a number and negates it
+console.log(resultMinus); // Output: -8
+
+// Logical NOT (!)
+let isTrue = true;
+let resultNot = !isTrue; // Inverts the Boolean value
+console.log(resultNot); // Output: false
+
+// Bitwise NOT (~)
+let num3 = 10;
+let resultBitwiseNot = ~num3; // Inverts the bits of 10 (signed 32-bit representation)
+console.log(resultBitwiseNot); // Output: -11
+
+// Typeof (typeof)
+let variable = 42;
+let resultTypeof = typeof variable; // Returns the type of the variable
+console.log(resultTypeof); // Output: number
+
+// Void (void)
+let expressionResult = void console.log(&#x27;Hello, World!&#x27;); // Evaluates the expression and returns undefined
+console.log(expressionResult); // Output: undefined
+
+// Delete (delete)
+let obj = { prop: &#x27;value&#x27; };
+delete obj.prop; // Deletes the property &#x27;prop&#x27; from the object
+console.log(obj); // Output: {}
+
+// Note: Be cautious when using the delete operator, and it is mainly used for deleting properties from objects.
+</code></pre><p id="8551121f-f4ed-4cb3-b300-b760f5e1e781" class="">
+</p><p id="2d65d61b-9cd4-4c8e-86b7-71af9996ba86" class="">
+</p><hr id="07acf81c-e7e1-4afd-a09e-172434041cdd"/><p id="af7457b4-60b2-4b65-b7ff-f52468c87030" class="">
+</p><p id="4154042d-c8e5-41bf-bec8-451759790f5a" class="">
+</p><p id="4311f7ac-e5b3-4ad8-8128-b8a730032340" class="">(Vii). Ternary Operator<br/><br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ae87bea4-96f2-4ac7-b585-cb8cfa508f78" class="code"><code class="language-Mermaid">graph TD
+    A[Ternary Operator]
+
+    B[Condition ?]
+    C[True Value :]
+    D[False Value]
+
+    A --&gt;|Condition ?| B
+    B --&gt;|True Value :| C
+    B --&gt;|False Value| D</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="761395e1-b365-4768-9f79-d4d98c5f78d2" class="code"><code class="language-JavaScript">let age = 20;
+let result = (age &gt;= 18) ? &#x27;Adult&#x27; : &#x27;Minor&#x27;;
+
+console.log(result); // Output: &#x27;Adult&#x27;</code></pre><p id="5f15bfcf-191e-49b9-b4ac-396917b5bc9e" class="">
+</p><p id="fa9fecdf-928e-49db-bddc-129c602da037" class="">
+</p><hr id="59685614-ca33-47bf-9079-7abbdbee74e6"/><p id="8a0e2687-0369-44c2-a6a5-a595dfc51eb4" class="">
+</p><p id="55306e80-3557-4f5a-bda0-1c2c97e0265b" class="">
+</p><p id="93b34892-6929-4637-a753-6b92b2507702" class="">(Viii). Equality Operators<br/><br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="72aac63c-fdc3-4d2a-884e-4bb4beaa1620" class="code"><code class="language-Mermaid">graph TD
+    A[Equality Operators]
+
+    B[== Equal]
+    C[!= Not Equal]
+    D[=== Strict Equal]
+    E[!== Strict Not Equal]
+
+    A --&gt;B
+    A --&gt;C
+    A --&gt;D
+    A --&gt;E</code></pre><p id="96bccba3-db87-46cd-9636-fa2ee883cf2d" class="">
+</p><p id="1aa2d37e-3ab3-46bb-9952-1784416774d8" class="">This flowchart illustrates the four main types of equality operators in JavaScript:</p><ol type="1" id="46088336-34e2-4d02-a32e-eaaa10f274a9" class="numbered-list" start="1"><li><strong>Equal (</strong><code><strong>==</strong></code><strong>):</strong><ul id="63ca211a-e1f8-42d9-a1a7-27e19792cf82" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are equal in value, regardless of their data types.</li></ul></li></ol><ol type="1" id="eabd2c6f-bc84-4bec-94d3-5d35c836dd5e" class="numbered-list" start="2"><li><strong>Not Equal (</strong><code><strong>!=</strong></code><strong>):</strong><ul id="f9a0e8e7-3e74-421e-8726-386873db7be4" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are not equal in value, regardless of their data types.</li></ul></li></ol><ol type="1" id="8a8ffa2a-9569-435e-a85f-daf862780d48" class="numbered-list" start="3"><li><strong>Strict Equal (</strong><code><strong>===</strong></code><strong>):</strong><ul id="b92e7940-7f20-42f6-92c1-547e8c538c74" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are equal in both value and data type.</li></ul></li></ol><ol type="1" id="942a9657-9ff6-4232-98dc-76a0382bf47f" class="numbered-list" start="4"><li><strong>Strict Not Equal (</strong><code><strong>!==</strong></code><strong>):</strong><ul id="e7b6d462-1007-4162-a5eb-379724dd93f4" class="bulleted-list"><li style="list-style-type:disc">Returns <code><strong>true</strong></code> if the operands are not equal in either value or data type.</li></ul></li></ol><p id="be9669ad-477b-4198-a882-da5c2775e1f6" class="">Here&#x27;s an example code snippet using these equality operators:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dfc6f098-700a-43d1-ae3d-816ffc6b152d" class="code code-wrap"><code class="language-JavaScript">let num1 = 5;
+let num2 = &#x27;5&#x27;;
+
+// Equal (==)
+console.log(num1 == num2); // Output: true (loose equality, values are equal)
+
+// Not Equal (!=)
+console.log(num1 != num2); // Output: false (loose inequality, values are equal)
+
+// Strict Equal (===)
+console.log(num1 === num2); // Output: false (strict equality, values are not of the same type)
+
+// Strict Not Equal (!==)
+console.log(num1 !== num2); // Output: true (strict inequality, values are not of the same type)</code></pre><p id="0d90bb99-fa7e-4fef-b40e-da0288ddad9d" class="">
+</p><p id="194b92e1-ddd3-4f4d-9aad-181b0fcc00ff" class="">
+</p><hr id="1f8598e2-1403-407e-8d70-c6964d4c47e2"/><p id="6547c90a-4869-465d-a603-ae682c20fff2" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
